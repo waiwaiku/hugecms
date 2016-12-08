@@ -8,8 +8,10 @@ var bodyParser = require('body-parser');
 // 加载配置文件
 var config = require('./config/common');
 var home = require('./routes/home');
-var admin = require('./routes/admin');
-var users = require('./routes/users');
+// var admin = require('./routes/admin');
+// var users = require('./routes/users');
+
+var MobileDetect = require("mobile-detect");
 
 var app = express();
 
@@ -28,9 +30,20 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next) {
     req.config = config;
+    req.config.root_path = __dirname;
+    console.log(__dirname);
+    var md = new MobileDetect(req.headers['user-agent']);
+    if (md.mobile() === null) {
+        req.is_mobile = false;
+        req.terminal_type = 'pc';
+    } else {
+        req.is_mobile = true;
+        req.terminal_type = 'mobile';
+    }
+    next();
 });
-app.use('/admin', admin);
-app.use('/users', users);
+// app.use('/admin', admin);
+// app.use('/users', users);
 app.use('/', home);
 
 // catch 404 and forward to error handler
