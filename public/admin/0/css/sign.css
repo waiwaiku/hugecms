@@ -1,0 +1,55 @@
+/* CSS Document */
+body{
+	background-color:#eee;
+	}
+
+#loginForm{
+	position:relative;
+	max-width:320px;
+	margin:10em auto;
+	}
+
+input.form-control{
+	position:relative;
+	height:50px;
+	font-size:16px;
+	margin-bottom:-1px;
+	z-index:1;
+	border-radius:0;
+	}
+
+input.form-control:focus{
+	z-index:2;
+	}
+
+#user{
+	border-radius:.5em .5em 0 0;
+	}
+
+#submit{
+	border-radius:0 0 0.5em 0.5em;
+	padding:0;
+	height:50px;
+	}
+
+#preserve{
+	border-radius:0;
+	height:50px;
+	font-size:16px;
+	}
+
+#verifyImg{
+	position:absolute;
+	z-index:3;
+	bottom:99px;
+	right:1px;
+	border-left:1px dashed #ddd;
+	}
+
+#erroInfo{
+	position:absolute;
+	}
+
+#erroInfo *{
+	color:#f00;
+}

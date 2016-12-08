@@ -1,0 +1,40 @@
+{
+    "name": "hugecms",
+    "version": "1.0.0",
+    "author": "kian",
+    "description": "a nodejs cms application",
+    "keywords": [
+        "hugecms"
+    ],
+    "private": true,
+    "license": "ISC",
+    "scripts": {
+        "start": "node ./bin/www"
+    },
+    "homepage": "https://github.com/waiwaiku/hugecms#readme",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/waiwaiku/hugecms.git"
+    },
+    "bugs": {
+        "url": "https://github.com/waiwaiku/hugecms/issues"
+    },
+    "dependencies": {
+        "body-parser": "~1.15.1",
+        "cookie-parser": "~1.4.3",
+        "debug": "~2.2.0",
+        "ejs": "~2.4.1",
+        "express": "~4.13.4",
+        "morgan": "~1.7.0",
+        "serve-favicon": "~2.3.0"
+    },
+    "devDependencies": {
+        "grunt": "^1.0.1",
+        "grunt-contrib-concat": "^1.0.1",
+        "grunt-contrib-copy": "^1.0.0",
+        "grunt-contrib-cssmin": "^1.0.1",
+        "grunt-contrib-jshint": "^1.0.0",
+        "grunt-contrib-uglify": "^2.0.0",
+        "grunt-contrib-watch": "^1.0.0"
+    }
+}

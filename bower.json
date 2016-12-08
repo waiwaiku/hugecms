@@ -1,0 +1,26 @@
+{
+  "name": "hugecms",
+  "description": "a nodejs cms application",
+  "main": "app.js",
+  "authors": [
+    "kian"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "hugecms"
+  ],
+  "homepage": "https://github.com/waiwaiku/hugecms",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery1": "jquery#^1.*.*",
+    "jquery2": "jquery#^2.*.*",
+    "jquery3": "jquery#^3.*.*",
+    "font-awesome": "^4.7.0"
+  }
+}
