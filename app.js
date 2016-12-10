@@ -6,10 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 // 加载配置文件
-var config = require('./config/common');
-var home = require('./routes/home');
-// var admin = require('./routes/admin');
-// var users = require('./routes/users');
+var config = require('./huge/config');
+var router = require('./huge/route');
 
 var MobileDetect = require("mobile-detect");
 
@@ -28,23 +26,26 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 初始化
 app.use(function(req, res, next) {
-    req.config = config;
-    req.config.root_path = __dirname;
-    console.log(__dirname);
+    req._config = config;
+    req._config.rootPath = __dirname;
+    req._config.appPath = path.join(req._config.rootPath, 'huge');
+
     var md = new MobileDetect(req.headers['user-agent']);
     if (md.mobile() === null) {
-        req.is_mobile = false;
-        req.terminal_type = 'pc';
+        req.isMobile = false;
+        req.terminalType = 'pc';
     } else {
-        req.is_mobile = true;
-        req.terminal_type = 'mobile';
+        req.isMobile = true;
+        req.terminalType = 'mobile';
     }
     next();
 });
-// app.use('/admin', admin);
-// app.use('/users', users);
-app.use('/', home);
+
+// 获取路径参数
+app.use('/', router);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
