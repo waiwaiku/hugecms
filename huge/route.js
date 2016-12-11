@@ -41,7 +41,9 @@ router.all(["/:M/:C/:A/\*", "/:M/:C/:A", "/:M/:C", "/:M", "/"], (req, res, next)
     }
 
     // console.log([req._module, req._controller, req._action]);
-    if (req._allowModules[req._module].controller.indexOf(`${req._controller}.js`) === -1) {
+
+    var _controller = req._allowModules[req._module].controller[req._controller];
+    if (_controller === undefined) {
         next();
     } else {
         var config = {};
@@ -60,7 +62,10 @@ router.all(["/:M/:C/:A/\*", "/:M/:C/:A", "/:M/:C", "/:M", "/"], (req, res, next)
                 res: res,
                 next: next
             };
-            let Controller = require(`./modules/${req._module}/controller/${req._controller}`)(options);
+            // let Controller = require(`./modules/${req._module}/controller/${req._controller}`)(options);
+            let Controller = _controller(options);
+
+            console.log(Controller.hasOwnProperty(req._action));
 
             // 过滤初始对象属性 以及 未知操作,防止恶意攻击
             if(Controller[req._action] === undefined || options[req._action] !== undefined) next();

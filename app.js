@@ -26,11 +26,13 @@ fs.readdir(modulePath, (err, files) => {
         var filepath = path.join(modulePath, filename);
         fs.stat(filepath, (err, stats) => {
             if(stats.isDirectory()) {
-                moduleList[filename] = {controller: []};
+                moduleList[filename] = {controller: {}};
                 // console.log(path.join(filepath, 'controller'));
                 fs.readdir(path.join(filepath, 'controller'), (err, files) => {
                     // console.log(files, filename);
-                    moduleList[filename].controller = files;
+                    for (let n = 0; n < files.length; n++) {
+                        moduleList[filename].controller[files[n].replace('.js', '')] = require(path.join(filepath, 'controller', files[n]));
+                    }
                 });
             }
         });
@@ -39,6 +41,7 @@ fs.readdir(modulePath, (err, files) => {
         if(config.disableModule.indexOf(files[i]) === -1) fn(files[i]);
         else continue;
     }
+
 });
 
 var app = express();
@@ -65,7 +68,7 @@ app.use((req, res, next) => {
     req._appPath = appPath;
     req._allowModules = moduleList;
 
-    // console.log(moduleList);
+    console.log(moduleList);
 
     var md = new MobileDetect(req.headers['user-agent']);
     if (md.mobile() === null) {
