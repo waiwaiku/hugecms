@@ -18,10 +18,12 @@ var route = require(`./${appName}/route`);
 var MobileDetect = require("mobile-detect");
 
 const appPath = path.join(__dirname, appName);
+const modulePath = path.join(appPath, 'modules');
+
 var moduleList = {};
-fs.readdir(appPath, (err, files) => {
+fs.readdir(modulePath, (err, files) => {
     var fn = function (filename) {
-        var filepath = path.join(appPath, filename);
+        var filepath = path.join(modulePath, filename);
         fs.stat(filepath, (err, stats) => {
             if(stats.isDirectory()) {
                 moduleList[filename] = {controller: []};

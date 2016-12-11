@@ -47,21 +47,22 @@ router.all(["/:M/:C/:A/\*", "/:M/:C/:A", "/:M/:C", "/:M", "/"], (req, res, next)
         var config = {};
         try{
             // 合并配置文件
-            Object.assign(config, req._config, require(`./${req._module}/config`));
+            Object.assign(config, req._config, require(`./modules/${req._module}/config`));
         }
         catch(e) {
             config = req._config;
         }
 
         try{
-            let Controller = require(`./${req._module}/controller/${req._controller}`)({
+            let Controller = require(`./modules/${req._module}/controller/${req._controller}`)({
                 config: config,
                 req: req,
                 res: res,
                 next: next
             });
 
-            if(Controller[req._action] === undefined) next();
+            // 过滤构造函数 以及 未知操作
+            if(req._action === 'constructor' || Controller[req._action] === undefined) next();
             else Controller[req._action](req.params);
         }
         catch(e) {

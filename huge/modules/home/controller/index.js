@@ -1,4 +1,4 @@
-var _controller = require("../../controller");
+var _controller = require("../../../class/controller");
 
 module.exports = function(option) {
     var Controller = new _controller('index', option);
