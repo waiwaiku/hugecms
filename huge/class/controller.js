@@ -15,15 +15,17 @@ var _controller = function (name, options, exfn) {
         this.config = options.config;
 
         // 禁止base 模块加载操作
-        if(this._initialize !== undefined && name !== 'base') this._initialize();
+        if(name !== 'base' && this._initialize !== undefined) this._initialize();
     };
 
     // 继承模块
     if(typeof exfn === 'function') {
+        // console.log(arguments[2]);
         Controller.prototype = exfn(options);
         delete Controller.prototype.constructor;
     }
 
+    // 注册操作方法
     this.register = function(obj) {
         for(let action in obj) {
             Controller.prototype[action] = obj[action];
