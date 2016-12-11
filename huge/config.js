@@ -1,7 +1,8 @@
-var path = require('path');
-
+// var path = require('path');
 var config = {
     'defaultModule': 'home', // 默认模块名
+    'disableModule': [],
+
     'defaultController': 'index', //默认控制器名
     'defaultAction': 'index', //默认行为名
     'defaultViewTtheme': '0', //默认主题

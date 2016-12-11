@@ -1,13 +1,12 @@
-var Controller = function(option) {
-    this.name = 'index';
-    this._req = option.req;
-    this._res = option.res;
-    this._next = option.next;
-    this._config = option.config;
-};
+var _controller = require("../../controller");
 
-Controller.prototype.index = function() {
-    this._res.send('moble'+':' + this._req.isMobile + '<br />' + this._req.terminalType);
-};
+module.exports = function(option) {
+    var Controller = new _controller('index', option);
+    Controller.register({
+        index: function() {
+            this.res.send('moble'+':' + this.req._isMobile + '<br />' + this.req._terminalType);
+        }
+    });
 
-module.exports = Controller;
+    return Controller.init();
+};
