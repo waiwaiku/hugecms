@@ -53,8 +53,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.use('/file', express.static(path.join(__dirname, 'upload')));
+app.use('/statics', express.static(path.join(__dirname, 'public')));
+app.use('/files', express.static(path.join(__dirname, 'upload')));
 
 // 初始化
 app.use((req, res, next) => {

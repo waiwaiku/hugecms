@@ -67,7 +67,7 @@ router.all(["/:M/:C/:A/\*", "/:M/:C/:A", "/:M/:C", "/:M", "/"], (req, res, next)
         catch(e) {
             next();
         } // try catch
-    }
+    } // if else
 });
 
 module.exports = router;
