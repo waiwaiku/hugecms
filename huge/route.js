@@ -54,15 +54,16 @@ router.all(["/:M/:C/:A/\*", "/:M/:C/:A", "/:M/:C", "/:M", "/"], (req, res, next)
         }
 
         try{
-            let Controller = require(`./modules/${req._module}/controller/${req._controller}`)({
+            let options = {
                 config: config,
                 req: req,
                 res: res,
                 next: next
-            });
+            };
+            let Controller = require(`./modules/${req._module}/controller/${req._controller}`)(options);
 
-            // 过滤构造函数 以及 未知操作
-            if(req._action === 'constructor' || Controller[req._action] === undefined) next();
+            // 过滤初始对象属性 以及 未知操作,防止恶意攻击
+            if(Controller[req._action] === undefined || options[req._action] !== undefined) next();
             else Controller[req._action](req.params);
         }
         catch(e) {
