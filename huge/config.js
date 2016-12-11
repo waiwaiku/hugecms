@@ -1,7 +1,7 @@
 // var path = require('path');
 var config = {
     'defaultModule': 'home', // 默认模块名
-    'disableModule': [],
+    'disableModule': [], // 禁止访问模块
 
     'defaultController': 'index', //默认控制器名
     'defaultAction': 'index', //默认行为名
